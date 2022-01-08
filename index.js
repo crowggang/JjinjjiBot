@@ -7,10 +7,11 @@
     const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
     client.commands = new Collection();
     let data = [];
+
     for(const file of commandFiles){
         const command = require(`./commands/${file}`);
         client.commands.set(command.name , command);
-        data.push({name:command.name , description : command.description ,options : command.options });
+        data.push({name:command.name, description : command.description ,options : command.options });
     }
 
     client.once('ready' , async () => {
