@@ -1,4 +1,5 @@
 const {CommandInteraction} = require('discord.js');
+
 module.exports = {
     name : 'ping2',
     description : 'ping 답변',
