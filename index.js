@@ -5,4 +5,5 @@
     client.on('ready', () => {
         console.log('theclient');
     });
+
     client.login(process.env.BOT_TOKEN);
