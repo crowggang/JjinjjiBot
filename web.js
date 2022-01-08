@@ -1,8 +1,12 @@
 const port = process.env.PORT || 8080;
-var express = require('express');
-var packageInfo = require('./package.json');
+const express = require('express');
+const packageInfo = require('./package.json');
+const Discord = require('discord.js');
 
-var app = express();
+const client = new Discord.Client();
+const config = require('./config.json');
+
+let app = express();
 
 app.get('/', function (req, res) {
     res.json({ version: packageInfo.version });
@@ -14,6 +18,10 @@ var server = app.listen(process.env.PORT, function () {
 
     console.log('Web server started at http://%s:%s', host, port);
 });
+
+
+
+
 app.listen(port, () => {
     console.log('Express server listening on port', port)
 });
