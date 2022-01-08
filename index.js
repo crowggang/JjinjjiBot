@@ -3,7 +3,8 @@
     const { Client, Intents, Collection} = require('discord.js');
     const client = new Client({ intents:[Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES] });
     const fs = require('fs');
-
+    let guildId ="910721739498061874";
+    let masterId ="428183420514992129";
     const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
     client.commands = new Collection();
     let data = [];
@@ -11,7 +12,7 @@
     for(const file of commandFiles){
         const command = require(`./commands/${file}`);
         client.commands.set(command.name , command);
-        data.push({name:command.name, description:command.description ,options : command.options });
+         data.push({name:command.name, description:command.description ,options : command.options });
     }
 
     client.once('ready' , async () =>{
@@ -23,19 +24,37 @@
     client.on('ready', () => {
         console.log(`Logged in as ${client.user.tag}!`);
     });
+    client.on('messageCreate', msg => {
+        console.log('aaaaa' , config.prefix)
 
-    client.on('interactionCreate', async interaction => {
-        if(!interaction.isCommand()) return;
+        if(!msg.content.startsWith(config.prefix) || msg.author.bot) return;
 
-        if(!client.commands.has(interaction.commandName)) return;
-            const command = client.commands.get(interaction.commandName);
-        try {
-            await command.execute(interaction);
+        const args = msg.content.slice(config.prefix.length).trim().split(/ +/);
+        const command = args.shift();
+        console.log('command' , command  );
+        if(!client.commands.has(command)) return;
+
+        try{
+            client.commands.get(command).execute(msg , args);
         }catch (error){
-            console.log('error!!' , error);
+            console.error("errorMessage" , error);
+
         }
 
+
     });
+    // client.on('interactionCreate', async interaction => {
+    //     if(!interaction.isCommand()) return;
+    //
+    //     if(!client.commands.has(interaction.commandName)) return;
+    //         const command = client.commands.get(interaction.commandName);
+    //     try {
+    //         await command.execute(interaction);
+    //     }catch (error){
+    //         console.log('error!!' , error);
+    //     }
+    //
+    // });
 
 
     // client.login(config.token);
