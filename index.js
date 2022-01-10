@@ -3,6 +3,7 @@
     const { Client, Intents, Collection} = require('discord.js');
     const client = new Client({ intents:[Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES] });
     const fs = require('fs');
+    const keepAlive = require('./server.js');
     let guildId ="910721739498061874";
     let masterId ="428183420514992129";
     const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -58,4 +59,5 @@
 
 
     // client.login(config.token);
+    keepAlive();
     client.login(process.env.BOT_TOKEN);
