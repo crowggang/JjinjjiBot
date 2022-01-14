@@ -26,7 +26,7 @@
         console.log(`Logged in as ${client.user.tag}!`);
     });
     client.on('messageCreate', msg => {
-        console.log(`msg :  : ${msg} `);
+        console.log(`msg :  : ${msg.author.username} `);
         console.log(`clientauthor :  : ${msg.author} `);
         console.log(`clientId :  : ${msg.author.id} `);
 
