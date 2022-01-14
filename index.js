@@ -26,7 +26,8 @@
         console.log(`Logged in as ${client.user.tag}!`);
     });
     client.on('messageCreate', msg => {
-        console.log(`clientId :  : ${message.author} `);
+        console.log(`clientauthor :  : ${message.author} `);
+        console.log(`clientId :  : ${message.author.id} `);
 
         if(!msg.content.startsWith(config.prefix) || msg.author.bot) return;
 
